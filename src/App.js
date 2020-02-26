@@ -24,6 +24,8 @@ class App extends Component {
     this.setState({currentLink: ''})
   };
   render() {
+    const link = this.props.shortenedLink;
+
     return (
         <>
           <Container maxWidth='md'>
@@ -31,24 +33,39 @@ class App extends Component {
                 <Grid item xs={12}>
                   <h1>Shorten your link!</h1>
                   <form onSubmit={this.submitHandler}>
-                    <TextField
-                        required
-                        name='currentLink'
-                        value={this.state.currentLink}
-                        onChange={this.inputChangeHandler}
-                    />
-                    <Button variant="contained" color="primary"
-                    type='submit'>
-                      Go!
-                    </Button>
+                    <Grid
+                        container
+                        direction="column"
+                        justify="center"
+                    >
+                      <Grid item xs={12}>
+                        <TextField
+                            fullWidth
+                            required
+                            name='currentLink'
+                            value={this.state.currentLink}
+                            onChange={this.inputChangeHandler}
+                        />
+                      </Grid>
+                      <Grid item align="center" style={{margin: '15px'}}>
+                        <Button variant="contained" color="primary"
+                                type='submit'>
+                          Go!
+                        </Button>
+                      </Grid>
+
+                    </Grid>
                   </form>
                 </Grid>
-              {
-                this.props.shortenedLink &&
-                <Link href={this.props.shortenedLink}>
-                  {this.props.shortenedLink}
-                </Link>
-              }
+              <Grid item xs={12}>
+                <h4>Your link:</h4>
+                {
+                  link &&
+                  <Link href={link}>
+                    {link}
+                  </Link>
+                }
+              </Grid>
 
             </Grid>
           </Container>
